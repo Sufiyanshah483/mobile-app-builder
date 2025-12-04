@@ -1,1 +1,7 @@
 project_id = "fcdnbbfoqfidginaicsx"
+
+[functions.verify-trust-score]
+verify_jwt = false
+
+[functions.scan-claim]
+verify_jwt = false
