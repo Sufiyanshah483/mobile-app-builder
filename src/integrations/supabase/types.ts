@@ -14,7 +14,111 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      game_progress: {
+        Row: {
+          attempts: number
+          completed: boolean
+          created_at: string
+          game_id: string
+          game_name: string
+          id: string
+          last_played_at: string | null
+          score: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          completed?: boolean
+          created_at?: string
+          game_id: string
+          game_name: string
+          id?: string
+          last_played_at?: string | null
+          score?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          completed?: boolean
+          created_at?: string
+          game_id?: string
+          game_name?: string
+          id?: string
+          last_played_at?: string | null
+          score?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          level: number
+          resilience_score: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          level?: number
+          resilience_score?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          level?: number
+          resilience_score?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      verification_history: {
+        Row: {
+          created_at: string
+          id: string
+          input_content: string
+          result_details: Json | null
+          result_score: string | null
+          result_verdict: string | null
+          user_id: string | null
+          verification_type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          input_content: string
+          result_details?: Json | null
+          result_score?: string | null
+          result_verdict?: string | null
+          user_id?: string | null
+          verification_type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          input_content?: string
+          result_details?: Json | null
+          result_score?: string | null
+          result_verdict?: string | null
+          user_id?: string | null
+          verification_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

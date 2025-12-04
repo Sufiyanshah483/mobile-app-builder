@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link2, Image, MessageSquareQuote, Gamepad2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import ResilienceScore from "@/components/ResilienceScore";
@@ -9,8 +10,9 @@ import { useToast } from "@/hooks/use-toast";
 const Index = () => {
   const [activeTab, setActiveTab] = useState("home");
   const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleToolClick = (toolName: string) => {
+  const handleComingSoon = (toolName: string) => {
     toast({
       title: `${toolName} selected`,
       description: "This feature is coming soon!",
@@ -49,7 +51,7 @@ const Index = () => {
             title="Trust Score"
             description="Check the credibility of any news article or website instantly"
             variant="primary"
-            onClick={() => handleToolClick("Trust Score")}
+            onClick={() => navigate("/trust-score")}
             delay={100}
           />
 
@@ -58,7 +60,7 @@ const Index = () => {
             title="Image & Video Check"
             description="Detect deepfakes and verify media authenticity"
             variant="default"
-            onClick={() => handleToolClick("Image & Video Check")}
+            onClick={() => handleComingSoon("Image & Video Check")}
             delay={200}
           />
 
@@ -67,7 +69,7 @@ const Index = () => {
             title="Claim Scanner"
             description="Fact-check quotes and claims against verified sources"
             variant="default"
-            onClick={() => handleToolClick("Claim Scanner")}
+            onClick={() => navigate("/claim-scanner")}
             delay={300}
           />
         </section>
@@ -83,7 +85,7 @@ const Index = () => {
             title="Inoculation Games"
             description="Learn to spot misinformation through interactive challenges"
             variant="accent"
-            onClick={() => handleToolClick("Inoculation Games")}
+            onClick={() => handleComingSoon("Inoculation Games")}
             delay={400}
           />
         </section>
