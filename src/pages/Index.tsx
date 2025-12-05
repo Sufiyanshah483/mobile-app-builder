@@ -5,25 +5,19 @@ import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import ResilienceScore from "@/components/ResilienceScore";
 import ToolCard from "@/components/ToolCard";
-import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("home");
-  const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleComingSoon = (toolName: string) => {
-    toast({
-      title: `${toolName} selected`,
-      description: "This feature is coming soon!",
-    });
-  };
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Ambient Background */}
+      <div className="absolute inset-0 gradient-ambient pointer-events-none" />
+      
       <Header />
       
-      <main className="container px-4 py-6 pb-24 space-y-6">
+      <main className="container px-4 py-6 pb-24 space-y-6 relative z-10">
         {/* Welcome Section */}
         <section className="animate-slide-up">
           <h1 className="text-2xl font-display font-bold text-foreground mb-1">
@@ -85,7 +79,7 @@ const Index = () => {
             title="Inoculation Games"
             description="Learn to spot misinformation through interactive challenges"
             variant="accent"
-            onClick={() => handleComingSoon("Inoculation Games")}
+            onClick={() => navigate("/games")}
             delay={400}
           />
         </section>
