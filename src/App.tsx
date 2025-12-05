@@ -7,6 +7,11 @@ import Index from "./pages/Index";
 import TrustScore from "./pages/TrustScore";
 import ClaimScanner from "./pages/ClaimScanner";
 import MediaAuthenticator from "./pages/MediaAuthenticator";
+import Auth from "./pages/Auth";
+import Games from "./pages/Games";
+import FakeNewsGame from "./pages/games/FakeNewsGame";
+import BiasDetectorGame from "./pages/games/BiasDetectorGame";
+import EmotionalLanguageGame from "./pages/games/EmotionalLanguageGame";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,9 +24,14 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/trust-score" element={<TrustScore />} />
           <Route path="/claim-scanner" element={<ClaimScanner />} />
           <Route path="/media-authenticator" element={<MediaAuthenticator />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/games/fake-news" element={<FakeNewsGame />} />
+          <Route path="/games/bias-detector" element={<BiasDetectorGame />} />
+          <Route path="/games/emotional-language" element={<EmotionalLanguageGame />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
