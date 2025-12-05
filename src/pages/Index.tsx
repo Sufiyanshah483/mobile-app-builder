@@ -60,7 +60,7 @@ const Index = () => {
             title="Image & Video Check"
             description="Detect deepfakes and verify media authenticity"
             variant="default"
-            onClick={() => handleComingSoon("Image & Video Check")}
+            onClick={() => navigate("/media-authenticator")}
             delay={200}
           />
 

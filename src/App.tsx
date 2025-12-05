@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import TrustScore from "./pages/TrustScore";
 import ClaimScanner from "./pages/ClaimScanner";
+import MediaAuthenticator from "./pages/MediaAuthenticator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/trust-score" element={<TrustScore />} />
           <Route path="/claim-scanner" element={<ClaimScanner />} />
+          <Route path="/media-authenticator" element={<MediaAuthenticator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
