@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.scan-claim]
 verify_jwt = false
+
+[functions.analyze-media]
+verify_jwt = false
