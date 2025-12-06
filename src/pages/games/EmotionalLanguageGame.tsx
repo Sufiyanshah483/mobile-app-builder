@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, RefreshCw } from "lucide-react";
+import { ArrowLeft, RefreshCw, Trophy, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { submitScore } from "@/hooks/useLeaderboard";
 
 interface Passage {
   id: number;
@@ -104,12 +105,15 @@ const EmotionalLanguageGame = () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.user) return;
 
+    // Submit to leaderboard
+    await submitScore(session.user.id, "emotional-language", "Emotional Language Spotter", score);
+
     const { data: existing } = await supabase
       .from("game_progress")
       .select("*")
       .eq("user_id", session.user.id)
       .eq("game_id", "emotional-language")
-      .single();
+      .maybeSingle();
 
     if (existing) {
       await supabase
@@ -136,8 +140,8 @@ const EmotionalLanguageGame = () => {
     }
 
     toast({
-      title: score >= 80 ? "Excellent!" : "Good try!",
-      description: `You scored ${score} points!`,
+      title: score >= 80 ? "🏆 Language Expert!" : "💪 Good try!",
+      description: `You scored ${score} points! Check the leaderboard!`,
     });
   };
 
@@ -293,27 +297,48 @@ const EmotionalLanguageGame = () => {
           </div>
         ) : (
           <div className="text-center space-y-6 animate-scale-in">
-            <div className="glass rounded-2xl p-8">
-              <div className="text-6xl mb-4">
-                {score >= 80 ? "🏆" : score >= 60 ? "⭐" : "💪"}
+            <div className="glass rounded-2xl p-8 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-pink-500/10" />
+              <div className="relative z-10">
+                <div className="text-7xl mb-4 animate-bounce">
+                  {score >= 80 ? "🏆" : score >= 60 ? "⭐" : "💪"}
+                </div>
+                <h2 className="text-2xl font-display font-bold text-foreground mb-2">
+                  {score >= 80 ? "Language Expert!" : score >= 60 ? "Good Eye!" : "Keep Practicing!"}
+                </h2>
+                <p className="text-5xl font-display font-bold text-gradient-primary mb-2">
+                  {score}/100
+                </p>
+                <p className="text-muted-foreground">
+                  Recognizing emotional manipulation helps you think more critically.
+                </p>
+                {score >= 80 && (
+                  <div className="flex items-center justify-center gap-2 mt-4 text-success">
+                    <Zap className="w-5 h-5" />
+                    <span className="font-medium">Score submitted to leaderboard!</span>
+                  </div>
+                )}
               </div>
-              <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-                {score >= 80 ? "Language Expert!" : score >= 60 ? "Good Eye!" : "Keep Practicing!"}
-              </h2>
-              <p className="text-4xl font-display font-bold text-primary mb-2">
-                {score}/100
-              </p>
-              <p className="text-muted-foreground">
-                Recognizing emotional manipulation helps you think more critically.
-              </p>
             </div>
-            <div className="flex gap-3">
-              <Button onClick={restartGame} variant="outline" className="flex-1 h-12">
-                <RefreshCw className="w-4 h-4 mr-2" />
-                Play Again
+            <div className="grid grid-cols-3 gap-3">
+              <Button onClick={restartGame} variant="outline" className="h-14 flex-col">
+                <RefreshCw className="w-4 h-4 mb-1" />
+                <span className="text-xs">Retry</span>
               </Button>
-              <Button onClick={() => navigate("/games")} className="flex-1 h-12 gradient-primary text-primary-foreground">
-                More Games
+              <Button 
+                onClick={() => navigate("/leaderboard")} 
+                variant="outline"
+                className="h-14 flex-col border-warning/30 hover:bg-warning/10"
+              >
+                <Trophy className="w-4 h-4 mb-1 text-warning" />
+                <span className="text-xs">Ranks</span>
+              </Button>
+              <Button 
+                onClick={() => navigate("/games")} 
+                className="h-14 flex-col gradient-primary text-primary-foreground"
+              >
+                <Zap className="w-4 h-4 mb-1" />
+                <span className="text-xs">More</span>
               </Button>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Newspaper, Scale, Heart, Trophy, Star } from "lucide-react";
+import { ArrowLeft, Newspaper, Scale, Heart, Trophy, Star, Crown, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
@@ -12,19 +12,21 @@ interface GameCardProps {
   color: string;
   onClick: () => void;
   progress?: number;
+  delay?: number;
 }
 
-const GameCard = ({ icon: Icon, title, description, color, onClick, progress = 0 }: GameCardProps) => (
+const GameCard = ({ icon: Icon, title, description, color, onClick, progress = 0, delay = 0 }: GameCardProps) => (
   <button
     onClick={onClick}
-    className="w-full glass rounded-xl p-5 text-left card-hover group"
+    className="w-full glass rounded-xl p-5 text-left card-hover group animate-slide-up"
+    style={{ animationDelay: `${delay}ms` }}
   >
     <div className="flex items-start gap-4">
-      <div className={`p-3 rounded-xl ${color} transition-transform group-hover:scale-110`}>
+      <div className={`p-3 rounded-xl ${color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
         <Icon className="w-6 h-6 text-primary-foreground" />
       </div>
       <div className="flex-1">
-        <h3 className="font-display font-semibold text-foreground mb-1">{title}</h3>
+        <h3 className="font-display font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{title}</h3>
         <p className="text-sm text-muted-foreground">{description}</p>
         {progress > 0 && (
           <div className="mt-3">
@@ -129,34 +131,65 @@ const Games = () => {
 
       <main className="container px-4 py-6 space-y-6 relative z-10">
         {/* Stats Banner */}
-        <div className="glass rounded-xl p-4 flex items-center justify-between">
+        <div className="glass rounded-xl p-4 flex items-center justify-between animate-slide-up">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg gradient-primary">
+            <div className="p-2.5 rounded-xl gradient-primary glow-primary">
               <Trophy className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Your Score</p>
-              <p className="font-display font-bold text-xl text-foreground">
+              <p className="text-sm text-muted-foreground">Total Score</p>
+              <p className="font-display font-bold text-2xl text-foreground">
                 {Object.values(gameProgress).reduce((a, b) => a + b, 0)} pts
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1">
-            {[1, 2, 3].map((star) => (
-              <Star 
-                key={star} 
-                className={`w-5 h-5 ${
-                  Object.keys(gameProgress).length >= star 
-                    ? "text-warning fill-warning" 
-                    : "text-muted-foreground/30"
-                }`}
-              />
-            ))}
+          <div className="flex flex-col items-end gap-1">
+            <div className="flex items-center gap-1">
+              {[1, 2, 3].map((star) => (
+                <Star 
+                  key={star} 
+                  className={`w-5 h-5 transition-all ${
+                    Object.keys(gameProgress).length >= star 
+                      ? "text-warning fill-warning animate-pulse-glow" 
+                      : "text-muted-foreground/30"
+                  }`}
+                />
+              ))}
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/leaderboard")}
+              className="text-xs text-primary hover:text-primary/80 p-0 h-auto"
+            >
+              <Crown className="w-3 h-3 mr-1" />
+              View Leaderboard
+            </Button>
           </div>
         </div>
 
+        {/* Leaderboard Quick Access */}
+        <button
+          onClick={() => navigate("/leaderboard")}
+          className="w-full glass rounded-xl p-4 flex items-center justify-between card-hover animate-slide-up group"
+          style={{ animationDelay: '50ms' }}
+        >
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-warning to-orange-500 transition-transform group-hover:scale-110">
+              <Crown className="w-5 h-5 text-warning-foreground" />
+            </div>
+            <div className="text-left">
+              <h3 className="font-display font-semibold text-foreground group-hover:text-warning transition-colors">Leaderboard</h3>
+              <p className="text-sm text-muted-foreground">See top players & rankings</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Flame className="w-5 h-5 text-warning animate-pulse" />
+          </div>
+        </button>
+
         {/* Description */}
-        <div className="animate-slide-up">
+        <div className="animate-slide-up" style={{ animationDelay: '100ms' }}>
           <h2 className="text-lg font-display font-semibold text-foreground mb-2">
             Build Your Defenses
           </h2>
@@ -169,17 +202,13 @@ const Games = () => {
         {/* Game Cards */}
         <div className="space-y-3">
           {games.map((game, index) => (
-            <div 
+            <GameCard
               key={game.id}
-              className="animate-slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <GameCard
-                {...game}
-                progress={gameProgress[game.id] || 0}
-                onClick={() => navigate(`/games/${game.id}`)}
-              />
-            </div>
+              {...game}
+              progress={gameProgress[game.id] || 0}
+              onClick={() => navigate(`/games/${game.id}`)}
+              delay={150 + index * 100}
+            />
           ))}
         </div>
 
