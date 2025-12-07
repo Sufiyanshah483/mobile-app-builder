@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Newspaper, Scale, Heart, Trophy, Star, Crown, Flame } from "lucide-react";
+import { ArrowLeft, Newspaper, Scale, Heart, Trophy, Star, Crown, Flame, Search, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
@@ -92,22 +92,36 @@ const Games = () => {
       id: "fake-news",
       icon: Newspaper,
       title: "Spot the Fake News",
-      description: "Can you tell real headlines from fake ones? Test your detection skills!",
+      description: "Can you tell real headlines from fake ones?",
       color: "bg-gradient-to-br from-primary to-emerald-500",
     },
     {
       id: "bias-detector",
       icon: Scale,
       title: "Source Bias Detector",
-      description: "Match news sources to their credibility and bias ratings.",
+      description: "Match news sources to their bias ratings.",
       color: "bg-gradient-to-br from-blue-500 to-cyan-500",
     },
     {
       id: "emotional-language",
       icon: Heart,
       title: "Emotional Language Spotter",
-      description: "Identify manipulative emotional language in text passages.",
+      description: "Identify manipulative emotional language.",
       color: "bg-gradient-to-br from-accent to-pink-500",
+    },
+    {
+      id: "source-verification",
+      icon: Search,
+      title: "Source Verification",
+      description: "Choose the most reliable sources for claims.",
+      color: "bg-gradient-to-br from-emerald-500 to-teal-500",
+    },
+    {
+      id: "lateral-reading",
+      icon: BookOpen,
+      title: "Lateral Reading Master",
+      description: "Learn pro fact-checking techniques.",
+      color: "bg-gradient-to-br from-purple-500 to-violet-500",
     },
   ];
 
