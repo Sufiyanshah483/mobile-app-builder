@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link2, Image, MessageSquareQuote, Gamepad2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -7,7 +6,6 @@ import ResilienceScore from "@/components/ResilienceScore";
 import ToolCard from "@/components/ToolCard";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("home");
   const navigate = useNavigate();
 
   return (
@@ -85,7 +83,7 @@ const Index = () => {
         </section>
       </main>
 
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      <BottomNav />
     </div>
   );
 };

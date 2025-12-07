@@ -10,6 +10,8 @@ import MediaAuthenticator from "./pages/MediaAuthenticator";
 import Auth from "./pages/Auth";
 import Games from "./pages/Games";
 import Leaderboard from "./pages/Leaderboard";
+import Profile from "./pages/Profile";
+import Verify from "./pages/Verify";
 import FakeNewsGame from "./pages/games/FakeNewsGame";
 import BiasDetectorGame from "./pages/games/BiasDetectorGame";
 import EmotionalLanguageGame from "./pages/games/EmotionalLanguageGame";
@@ -29,8 +31,10 @@ const App = () => (
           <Route path="/trust-score" element={<TrustScore />} />
           <Route path="/claim-scanner" element={<ClaimScanner />} />
           <Route path="/media-authenticator" element={<MediaAuthenticator />} />
+          <Route path="/verify" element={<Verify />} />
           <Route path="/games" element={<Games />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/games/fake-news" element={<FakeNewsGame />} />
           <Route path="/games/bias-detector" element={<BiasDetectorGame />} />
           <Route path="/games/emotional-language" element={<EmotionalLanguageGame />} />
