@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
-import factguardLogo from "@/assets/factguard-logo.png";
+import qurifyLogo from "@/assets/qurify-logo.png";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -66,7 +66,7 @@ const Auth = () => {
         if (error) throw error;
         toast({
           title: "Account created!",
-          description: "Welcome to FactGuard. Start building your digital resilience!",
+          description: "Welcome to Qurify. Start building your digital resilience!",
         });
       }
     } catch (error: any) {
@@ -88,13 +88,13 @@ const Auth = () => {
         <div className="text-center mb-8 animate-slide-up">
           <div className="flex justify-center mb-4">
             <img 
-              src={factguardLogo} 
-              alt="FactGuard" 
-              className="w-20 h-20 object-contain"
+              src={qurifyLogo} 
+              alt="Qurify" 
+              className="w-20 h-20 object-contain rounded-xl"
             />
           </div>
           <h1 className="text-3xl font-display font-bold text-foreground">
-            {isLogin ? "Welcome Back" : "Join FactGuard"}
+            {isLogin ? "Welcome Back" : "Join Qurify"}
           </h1>
           <p className="text-muted-foreground mt-2">
             {isLogin 

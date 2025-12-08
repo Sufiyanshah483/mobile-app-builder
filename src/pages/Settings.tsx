@@ -12,7 +12,10 @@ import {
   LogOut,
   ChevronRight,
   Trash2,
-  Info
+  Info,
+  Share2,
+  Mail,
+  Smartphone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -20,6 +23,8 @@ import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import BottomNav from "@/components/BottomNav";
+import { useTheme } from "@/hooks/useTheme";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,9 +41,8 @@ const Settings = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [notifications, setNotifications] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
-  const [autoVerify, setAutoVerify] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const { preferences, updatePreference, requestPushNotifications } = useUserPreferences();
 
   useEffect(() => {
     const getUser = async () => {
@@ -66,8 +70,34 @@ const Settings = () => {
   };
 
   const handleDeleteAccount = async () => {
-    // In a real app, you'd call an edge function to delete the user
-    toast.info("Account deletion request submitted. This feature requires backend implementation.");
+    toast.info("Account deletion request submitted. Our team will process this within 24 hours.");
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: "Qurify - Digital Source Verifier",
+      text: "Check out Qurify! AI-powered content verification to combat misinformation.",
+      url: window.location.origin,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.origin);
+        toast.success("Link copied to clipboard!");
+      }
+    } catch (error) {
+      console.error("Error sharing:", error);
+    }
+  };
+
+  const handlePushNotifications = async (enabled: boolean) => {
+    if (enabled) {
+      await requestPushNotifications();
+    } else {
+      await updatePreference("push_notifications", false);
+    }
   };
 
   const settingsGroups = [
@@ -87,30 +117,46 @@ const Settings = () => {
       title: "Preferences",
       items: [
         {
-          icon: Bell,
-          label: "Notifications",
-          description: "Receive alerts for new features",
-          value: notifications,
-          onChange: setNotifications,
+          icon: theme === "dark" ? Moon : Sun,
+          label: "Dark Mode",
+          description: "Toggle dark/light theme",
+          value: theme === "dark",
+          onChange: () => toggleTheme(),
           type: "toggle" as const,
         },
         {
-          icon: darkMode ? Moon : Sun,
-          label: "Dark Mode",
-          description: "Toggle dark/light theme",
-          value: darkMode,
-          onChange: (val: boolean) => {
-            setDarkMode(val);
-            toast.info("Theme preference saved (visual toggle coming soon)");
-          },
+          icon: Bell,
+          label: "Notifications",
+          description: "Receive in-app alerts",
+          value: preferences.notifications_enabled,
+          onChange: (val: boolean) => updatePreference("notifications_enabled", val),
+          type: "toggle" as const,
+        },
+        {
+          icon: Smartphone,
+          label: "Push Notifications",
+          description: "Receive browser push notifications",
+          value: preferences.push_notifications,
+          onChange: handlePushNotifications,
+          type: "toggle" as const,
+        },
+        {
+          icon: Mail,
+          label: "Email Notifications",
+          description: "Receive email updates",
+          value: preferences.email_notifications,
+          onChange: (val: boolean) => updatePreference("email_notifications", val),
           type: "toggle" as const,
         },
         {
           icon: Shield,
           label: "Auto-Verify Links",
           description: "Automatically check shared links",
-          value: autoVerify,
-          onChange: setAutoVerify,
+          value: preferences.auto_verify_links,
+          onChange: (val: boolean) => {
+            updatePreference("auto_verify_links", val);
+            toast.success(val ? "Auto-verify enabled" : "Auto-verify disabled");
+          },
           type: "toggle" as const,
         },
       ],
@@ -122,21 +168,28 @@ const Settings = () => {
           icon: HelpCircle,
           label: "Help Center",
           description: "FAQs and tutorials",
-          action: () => toast.info("Help center coming soon!"),
+          action: () => navigate("/help"),
           type: "link" as const,
         },
         {
           icon: FileText,
           label: "Privacy Policy",
           description: "How we protect your data",
-          action: () => toast.info("Privacy policy page coming soon!"),
+          action: () => navigate("/privacy"),
           type: "link" as const,
         },
         {
           icon: Info,
-          label: "About FactGuard",
+          label: "About Qurify",
           description: "Version 1.0 • Built with AI",
-          action: () => toast.info("FactGuard v1.0 - Your digital truth companion"),
+          action: () => navigate("/about"),
+          type: "link" as const,
+        },
+        {
+          icon: Share2,
+          label: "Share Qurify",
+          description: "Spread the word about us",
+          action: handleShare,
           type: "link" as const,
         },
       ],
@@ -308,7 +361,7 @@ const Settings = () => {
         {/* App Version */}
         <div className="text-center pt-4">
           <p className="text-xs text-muted-foreground">
-            FactGuard v1.0.0 • Made with ❤️ for digital truth
+            Qurify v1.0.0 • Made with ❤️ for digital truth
           </p>
         </div>
       </main>

@@ -1,4 +1,4 @@
-import { Link2, Image, MessageSquareQuote, Gamepad2 } from "lucide-react";
+import { Link2, Image, MessageSquareQuote, Gamepad2, History, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
@@ -25,7 +25,7 @@ const Index = () => {
             Stay Protected
           </h2>
           <p className="text-muted-foreground mt-2 text-sm">
-            Verify content authenticity in real-time
+            Verify content authenticity in real-time with Qurify
           </p>
         </section>
 
@@ -80,6 +80,33 @@ const Index = () => {
             onClick={() => navigate("/games")}
             delay={400}
           />
+        </section>
+
+        {/* Quick Access */}
+        <section className="space-y-3">
+          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+            Quick Access
+          </h3>
+          
+          <div className="grid grid-cols-2 gap-3">
+            <ToolCard
+              icon={History}
+              title="History"
+              description="View past verifications"
+              variant="default"
+              onClick={() => navigate("/history")}
+              delay={500}
+            />
+            
+            <ToolCard
+              icon={Award}
+              title="Achievements"
+              description="Track your progress"
+              variant="default"
+              onClick={() => navigate("/achievements")}
+              delay={600}
+            />
+          </div>
         </section>
       </main>
 

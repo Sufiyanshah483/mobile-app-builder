@@ -21,6 +21,9 @@ import Verify from "./pages/Verify";
 import History from "./pages/History";
 import Achievements from "./pages/Achievements";
 import Settings from "./pages/Settings";
+import About from "./pages/About";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import HelpCenter from "./pages/HelpCenter";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +51,9 @@ const App = () => (
           <Route path="/history" element={<History />} />
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/help" element={<HelpCenter />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
