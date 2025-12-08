@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Verify from "./pages/Verify";
 import History from "./pages/History";
 import Achievements from "./pages/Achievements";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/verify" element={<Verify />} />
           <Route path="/history" element={<History />} />
           <Route path="/achievements" element={<Achievements />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
