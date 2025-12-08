@@ -178,6 +178,42 @@ export type Database = {
           },
         ]
       }
+      user_preferences: {
+        Row: {
+          auto_verify_links: boolean
+          created_at: string
+          email_notifications: boolean
+          id: string
+          notifications_enabled: boolean
+          push_notifications: boolean
+          theme: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auto_verify_links?: boolean
+          created_at?: string
+          email_notifications?: boolean
+          id?: string
+          notifications_enabled?: boolean
+          push_notifications?: boolean
+          theme?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          auto_verify_links?: boolean
+          created_at?: string
+          email_notifications?: boolean
+          id?: string
+          notifications_enabled?: boolean
+          push_notifications?: boolean
+          theme?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       verification_history: {
         Row: {
           created_at: string

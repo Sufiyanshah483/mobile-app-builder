@@ -15,7 +15,7 @@
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 160 84% 39%;
+    --primary: 174 72% 46%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 217 33% 17%;
@@ -24,7 +24,7 @@
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 262 83% 58%;
+    --accent: 199 89% 48%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
@@ -38,28 +38,83 @@
 
     --border: 217 33% 20%;
     --input: 217 33% 17%;
-    --ring: 160 84% 39%;
+    --ring: 174 72% 46%;
 
     --radius: 0.75rem;
 
-    /* Custom FactGuard tokens */
+    /* Custom Qurify tokens */
     --trust-high: 142 70% 45%;
     --trust-medium: 38 92% 55%;
     --trust-low: 0 72% 51%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(180 90% 45%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(280 90% 65%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(174 72% 46%) 0%, hsl(199 89% 48%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(199 89% 48%) 0%, hsl(217 91% 60%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(222 47% 13%) 0%, hsl(222 47% 9%) 100%);
-    --gradient-ambient: radial-gradient(ellipse at top, hsl(160 84% 39% / 0.15) 0%, transparent 50%);
+    --gradient-ambient: radial-gradient(ellipse at top, hsl(174 72% 46% / 0.15) 0%, transparent 50%);
 
     --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary: 174 72% 46%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 217 33% 17%;
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 217 33% 20%;
-    --sidebar-ring: 160 84% 39%;
+    --sidebar-ring: 174 72% 46%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 174 72% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 199 89% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 174 72% 40%;
+
+    /* Custom Qurify tokens - light */
+    --trust-high: 142 70% 40%;
+    --trust-medium: 38 92% 45%;
+    --trust-low: 0 72% 45%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(174 72% 40%) 0%, hsl(199 89% 45%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(199 89% 45%) 0%, hsl(217 91% 55%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 14% 98%) 100%);
+    --gradient-ambient: radial-gradient(ellipse at top, hsl(174 72% 40% / 0.1) 0%, transparent 50%);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 174 72% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 174 72% 40%;
   }
 
   .dark {
@@ -72,7 +127,7 @@
     --popover: 222 47% 9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 160 84% 45%;
+    --primary: 174 72% 50%;
     --primary-foreground: 222 47% 6%;
 
     --secondary: 217 33% 17%;
@@ -81,7 +136,7 @@
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 262 83% 65%;
+    --accent: 199 89% 52%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 63% 31%;
@@ -95,26 +150,26 @@
 
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 160 84% 45%;
+    --ring: 174 72% 50%;
 
-    /* Custom FactGuard tokens - dark */
+    /* Custom Qurify tokens - dark */
     --trust-high: 142 70% 45%;
     --trust-medium: 38 92% 55%;
     --trust-low: 0 75% 55%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(160 84% 45%) 0%, hsl(180 90% 50%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(262 83% 65%) 0%, hsl(280 90% 70%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(174 72% 50%) 0%, hsl(199 89% 52%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(199 89% 52%) 0%, hsl(217 91% 60%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(222 47% 11%) 0%, hsl(222 47% 8%) 100%);
-    --gradient-ambient: radial-gradient(ellipse at top, hsl(160 84% 45% / 0.1) 0%, transparent 50%);
+    --gradient-ambient: radial-gradient(ellipse at top, hsl(174 72% 50% / 0.1) 0%, transparent 50%);
 
     --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 160 84% 45%;
+    --sidebar-primary: 174 72% 50%;
     --sidebar-primary-foreground: 222 47% 6%;
     --sidebar-accent: 217 33% 17%;
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 160 84% 45%;
+    --sidebar-ring: 174 72% 50%;
   }
 }
 
@@ -162,6 +217,10 @@
 
   .glass-strong {
     @apply bg-card/95 backdrop-blur-2xl border border-border/60;
+  }
+
+  .glass-card {
+    @apply bg-card/90 backdrop-blur-lg border border-border/40 rounded-xl;
   }
 
   .glow-primary {
@@ -264,6 +323,50 @@
     }
     50% {
       box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+    }
+  }
+
+  /* Slide animations */
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out forwards;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out forwards;
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 }
