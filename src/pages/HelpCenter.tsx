@@ -185,7 +185,11 @@ const HelpCenter = () => {
                 <h4 className="font-semibold text-foreground">Contact Support</h4>
                 <p className="text-xs text-muted-foreground">We typically respond within 24 hours</p>
               </div>
-              <Button size="sm" className="gradient-primary text-primary-foreground">
+              <Button 
+                size="sm" 
+                className="gradient-primary text-primary-foreground"
+                onClick={() => window.location.href = 'mailto:sufiyanshah4545@gmail.com?subject=Qurify Support Request'}
+              >
                 <Mail className="w-4 h-4 mr-2" />
                 Email Us
               </Button>

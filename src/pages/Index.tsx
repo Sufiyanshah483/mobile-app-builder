@@ -1,12 +1,35 @@
-import { Link2, Image, MessageSquareQuote, Gamepad2, History, Award } from "lucide-react";
+import { Link2, Image, MessageSquareQuote, Gamepad2, History, Award, Flame, Share2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import ResilienceScore from "@/components/ResilienceScore";
 import ToolCard from "@/components/ToolCard";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const navigate = useNavigate();
+
+  const handleShare = async () => {
+    const shareData = {
+      title: 'Qurify - Digital Source Verifier',
+      text: 'Build your digital resilience with Qurify! Verify news, detect deepfakes, and become a misinformation expert. 🛡️',
+      url: window.location.origin
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        toast.success("Thanks for sharing Qurify!");
+      } catch (err) {
+        console.log('Share cancelled');
+      }
+    } else {
+      navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+      toast.success("Link copied to clipboard!");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -31,6 +54,23 @@ const Index = () => {
 
         {/* Resilience Score */}
         <ResilienceScore score={42} />
+
+        {/* Daily Challenges Highlight */}
+        <Card 
+          className="glass-card p-4 border-accent/30 cursor-pointer hover:border-accent/50 transition-all animate-slide-up"
+          onClick={() => navigate("/daily-challenges")}
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
+              <Flame className="w-6 h-6 text-white" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-foreground">Daily Challenges</h3>
+              <p className="text-xs text-muted-foreground">Complete today's tasks for bonus points!</p>
+            </div>
+            <span className="text-xs px-2 py-1 rounded-full bg-accent/20 text-accent font-medium">New</span>
+          </div>
+        </Card>
 
         {/* Main Tools */}
         <section className="space-y-3">
@@ -107,6 +147,24 @@ const Index = () => {
               delay={600}
             />
           </div>
+        </section>
+
+        {/* Share Section */}
+        <section className="animate-slide-up" style={{ animationDelay: "700ms" }}>
+          <Card className="glass-card p-4 border-primary/20">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Share2 className="w-5 h-5 text-primary" />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-semibold text-foreground text-sm">Share Qurify</h4>
+                <p className="text-xs text-muted-foreground">Help others stay protected</p>
+              </div>
+              <Button size="sm" variant="outline" onClick={handleShare}>
+                Share
+              </Button>
+            </div>
+          </Card>
         </section>
       </main>
 
