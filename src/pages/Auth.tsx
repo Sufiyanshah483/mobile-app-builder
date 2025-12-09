@@ -53,7 +53,7 @@ const Auth = () => {
         });
       } else {
         const redirectUrl = `${window.location.origin}/`;
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -64,6 +64,16 @@ const Auth = () => {
           },
         });
         if (error) throw error;
+
+        // Send welcome email
+        try {
+          await supabase.functions.invoke('send-welcome-email', {
+            body: { email, displayName }
+          });
+        } catch (emailError) {
+          console.log('Welcome email skipped:', emailError);
+        }
+
         toast({
           title: "Account created!",
           description: "Welcome to Qurify. Start building your digital resilience!",

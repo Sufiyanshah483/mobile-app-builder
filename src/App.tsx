@@ -24,6 +24,7 @@ import Settings from "./pages/Settings";
 import About from "./pages/About";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import HelpCenter from "./pages/HelpCenter";
+import DailyChallenges from "./pages/DailyChallenges";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/help" element={<HelpCenter />} />
+          <Route path="/daily-challenges" element={<DailyChallenges />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

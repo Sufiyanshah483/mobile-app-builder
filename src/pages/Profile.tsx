@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, User, Trophy, Target, Gamepad2, LogOut, Edit2, Check, X } from "lucide-react";
+import { ArrowLeft, Trophy, Target, Gamepad2, LogOut, Edit2, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import BottomNav from "@/components/BottomNav";
+import AvatarUpload from "@/components/AvatarUpload";
 
 interface ProfileData {
   display_name: string | null;
@@ -164,9 +165,11 @@ const Profile = () => {
         {/* Profile Card */}
         <Card className="glass-card p-6 border-primary/20 animate-slide-up">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
-              <User className="w-10 h-10 text-primary-foreground" />
-            </div>
+            <AvatarUpload
+              userId={user?.id}
+              currentAvatarUrl={profile?.avatar_url || null}
+              onAvatarUpdate={(url) => setProfile(prev => prev ? { ...prev, avatar_url: url } : null)}
+            />
             <div className="flex-1">
               {editing ? (
                 <div className="flex items-center gap-2">
